@@ -27,3 +27,4 @@ query_array = parse_data("../MSLR-WEB10K/Fold1/test.txt")
 
 for query in query_array:
     print(Metric(query).ndcg())
+
