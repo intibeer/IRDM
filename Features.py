@@ -6,5 +6,3 @@ class Features:
         self.qid = qid
         self.features = np.array([features])
         self.index = index
-        
-    
