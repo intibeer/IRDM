@@ -99,18 +99,17 @@ def average_precision(query_relevances, rel_con=4):
     Returns:
         float: The average precision.
     '''
-    precisions = []
-    num_rel = len([1 for i in query_relevances if i >= rel_con])
-
-    for rank in range(1, len(query_relevances)):
-        isRelevant = 1 if query_relevances[rank] >= rel_con else 0
-        precisions.append(precision(query_relevances, rank, rel_con) * isRelevant)
+    query_relevances = np.array(query_relevances)
+    r = query_relevances >= rel_con
 
     try:
-        avg_precision = sum(precisions)/num_rel
+        avg_precision = np.mean([precision(query_relevances, rank + 1, rel_con) for rank in range(r.size) if r[rank]])
 
     except ZeroDivisionError:
         avg_precision = 0.0
+
+    if np.isnan(avg_precision):
+        return 0.0
 
     return avg_precision
 
