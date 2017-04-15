@@ -1,40 +1,127 @@
+'''
+Metric functions to assess how well models meet the information needs of users.
+
+Author: Liam Eloie
+'''
+
 import numpy as np
-from query import Query
 
+def cg(query_relevances, rank):
+    '''
+    Calculates the cumulative gain at a particular rank position.
 
-class Metric(object):
-    def __init__(self, query):
-        self.query = query
+    Args:
+        query_relevances (list): A list of relevancies e.g. [0, 1, 2, 2, 3, 1].
+        rank (int): The cut-off rank.
 
-    def cg(self):
-        return sum(query.relevance)
+    Returns:
+        int: The cumulative gain.
+    '''
+    return sum(query_relevances[:rank])
 
-    def dcg(self):
-        summation = 0
-        sorted_relevance = sorted(self.query.relevance)
+def dcg(query_relevances, rank):
+    '''
+    Calculates the discounted cumulative gain at a particular rank position.
 
-        for index, rel in enumerate(sorted_relevance):
-            summation += float(rel) / np.log2(index + 1 + 1)
+    Args:
+        query_relevances (list): A list of relevancies e.g. [0, 1, 2, 2, 3, 1].
+        rank (int): The cut-off rank.
 
-        return summation
+    Returns:
+        float: The discounted cumulative gain.
+    '''
+    query_relevances = np.array(query_relevances, dtype='float')[:rank]
+    discounted = query_relevances / np.log2(np.array([i for i in range(2, len(query_relevances) + 2)]))
 
-    def idcg(self):
-        summation = 0
-        sorted_relevance = sorted(self.query.relevance)
+    return np.sum(discounted)
 
-        for index, rel in enumerate(sorted_relevance):
-            summation += (2**(rel) - 1)/np.log2(index + 1 + 1)
+def idcg(query_relevances, rank):
+    '''
+    Calculates the ideal discounted cumulative gain at a particular rank position.
 
-        return summation
+    Args:
+        query_relevances (list): A list of relevancies e.g. [0, 1, 2, 2, 3, 1].
+        rank (int): The cut-off rank.
 
-    def ndcg(self):
-        try:
-            ndcg_value = self.dcg() / self.idcg()
-        
-        except ZeroDivisionError:
-            ndcg_value = 0
+    Returns:
+        float: The ideal discounted cumulative gain.
+    '''
+    return dcg(sorted(query_relevances, reverse=True), rank)
 
-        if(np.isnan(ndcg_value)):
-            return -1
-        else:
-            return ndcg_value
+def ndcg(query_relevances, rank):
+    '''
+    Calculates the normalised discounted cumulative gain at a particular rank position.
+
+    Args:
+        query_relevances (list): A list of relevancies e.g. [0, 1, 2, 2, 3, 1].
+        rank (float): The cut-off rank.
+
+    Returns:
+        float: The normalised discounted cumulative gain. Between 0 and 1.
+    '''
+    dcg_value, idcg_value = dcg(query_relevances, rank), idcg(query_relevances, rank)
+    
+    if(dcg_value == 0 or idcg_value == 0):
+        return 0
+
+    else:
+        return dcg_value / idcg_value
+
+def precision(query_relevances, rank, rel_con=4):
+    '''
+    Calculates the precision at a particular rank position.
+
+    Args:
+        query_relevances (list): A list of relevancies e.g. [0, 1, 2, 2, 3, 1].
+        rank (float): The cut-off rank.
+        rel_con (int): The relevance integer that is considered 'relevant'.
+
+    Returns:
+        float: The precision - fraction of relevant documents retrieved from a query.
+    '''
+    query_relevances = query_relevances[:rank]
+    num_rel = len([1 for i in query_relevances if i >= rel_con])
+    num_retrieved = len(query_relevances)
+
+    try:
+        return float(num_rel) / float(num_retrieved)
+    except ZeroDivisionError:
+        return 0
+
+def average_precision(query_relevances, rel_con=4):
+    '''
+    Calculates the average precision.
+
+    Args:
+        query_relevances (list): A list of relevancies e.g. [0, 1, 2, 2, 3, 1].
+        rel_con (int): The relevance integer that is considered 'relevant'.
+
+    Returns:
+        float: The average precision.
+    '''
+    query_relevances = np.array(query_relevances)
+    r = query_relevances >= rel_con
+
+    try:
+        avg_precision = np.mean([precision(query_relevances, rank + 1, rel_con) for rank in range(r.size) if r[rank]])
+
+    except ZeroDivisionError:
+        avg_precision = 0.0
+
+    if np.isnan(avg_precision):
+        return 0.0
+
+    return avg_precision
+
+def mean_average_precision(queries, rel_con):
+    '''
+    Calculates the mean average precision.
+
+    Args:
+        queries(list): A list of relevances for multiple queries e.g. [[0, 1, 2, 2, 3, 1], [1, 2, 0, 0, 1, 4, 3]].
+        rel_con (int): The relevance integer that is considered 'relevant'.
+
+    Returns:
+        float: The mean average precision.
+    '''
+    return np.mean([average_precision(query_relevances, rel_con) for query_relevances in queries])
