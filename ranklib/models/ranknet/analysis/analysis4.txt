@@ -1,0 +1,51 @@
+Reading output_fold_4/baseline_ndcg.txt... 2001 ranked lists [Done]
+Reading output_fold_4/ranknet4_layers2_ndcg.txt... 2001 ranked lists [Done]
+Reading output_fold_4/ranknet4_lr0.5_ndcg.txt... 2001 ranked lists [Done]
+Reading output_fold_4/ranknet4_lr0.05_ndcg.txt... 2001 ranked lists [Done]
+Reading output_fold_4/ranknet4_layers3_ndcg.txt... 2001 ranked lists [Done]
+Reading output_fold_4/ranknet4_lr0.00000500_ndcg.txt... 2001 ranked lists [Done]
+Reading output_fold_4/ranknet4_nodes15_ndcg.txt... 2001 ranked lists [Done]
+Reading output_fold_4/ranknet4_nodes20_ndcg.txt... 2001 ranked lists [Done]
+Reading output_fold_4/ranknet4_nodes5_ndcg.txt... 2001 ranked lists [Done]
+Reading output_fold_4/ranknet4_lr0.0005_ndcg.txt... 2001 ranked lists [Done]
+Reading output_fold_4/ranknet4_layers1_ndcg.txt... 2001 ranked lists [Done]
+Reading output_fold_4/ranknet4_lr0.005_ndcg.txt... 2001 ranked lists [Done]
+Reading output_fold_4/ranknet4_lr0.00005000_ndcg.txt... 2001 ranked lists [Done]
+Reading output_fold_4/ranknet4_nodes10_ndcg.txt... 2001 ranked lists [Done]
+
+
+Overall comparison
+------------------------------------------------------------------------
+System	Performance	Improvement	Win	Loss	p-value
+baseline_ndcg.txt [baseline]	0.1764
+ranknet4_layers2_ndcg.txt	0.1998	+0.0234 (+13.29%)	1092	777	0.0
+ranknet4_lr0.5_ndcg.txt	0.1764	+0.0 (+0.0%)	1	1	0.7428
+ranknet4_lr0.05_ndcg.txt	0.1764	+0.0 (+0.01%)	158	86	0.9595
+ranknet4_layers3_ndcg.txt	0.1996	+0.0232 (+13.17%)	989	820	0.0
+ranknet4_lr0.00000500_ndcg.txt	0.2028	+0.0264 (+14.99%)	1032	801	0.0
+ranknet4_nodes15_ndcg.txt	0.1947	+0.0183 (+10.38%)	923	847	0.0
+ranknet4_nodes20_ndcg.txt	0.1962	+0.0198 (+11.24%)	942	819	0.0
+ranknet4_nodes5_ndcg.txt	0.2006	+0.0243 (+13.76%)	1029	809	0.0
+ranknet4_lr0.0005_ndcg.txt	0.2043	+0.0279 (+15.81%)	1109	760	0.0
+ranknet4_layers1_ndcg.txt	0.1965	+0.0202 (+11.43%)	1077	789	0.0
+ranknet4_lr0.005_ndcg.txt	0.1961	+0.0197 (+11.18%)	1036	810	0.0
+ranknet4_lr0.00005000_ndcg.txt	0.1877	+0.0114 (+6.44%)	657	748	0.0
+ranknet4_nodes10_ndcg.txt	0.1962	+0.0198 (+11.24%)	942	819	0.0
+
+
+Detailed break down
+------------------------------------------------------------------------
+	[ < -100%)	[-100%, -75%)	[-75%, -50%)	[-50%, -25%)	[-25%, 0%)	(0%, +25%]	(+25%, +50%]	(+50%, +75%]	(+75%, +100%]	( > +100%]
+ranknet4_layers2_ndcg.txt	0	0	5	81	691	966	116	9	1	0
+ranknet4_lr0.5_ndcg.txt	0	0	0	0	1	1	0	0	0	0
+ranknet4_lr0.05_ndcg.txt	0	0	0	1	85	158	0	0	0	0
+ranknet4_layers3_ndcg.txt	0	0	2	45	773	887	94	8	0	0
+ranknet4_lr0.00000500_ndcg.txt	0	0	6	63	732	902	117	9	4	0
+ranknet4_nodes15_ndcg.txt	0	0	5	36	806	822	94	6	1	0
+ranknet4_nodes20_ndcg.txt	0	0	2	35	782	864	73	5	0	0
+ranknet4_nodes5_ndcg.txt	0	0	6	56	747	905	116	7	1	0
+ranknet4_lr0.0005_ndcg.txt	0	0	5	71	684	972	119	17	1	0
+ranknet4_layers1_ndcg.txt	0	0	10	82	697	958	108	11	0	0
+ranknet4_lr0.005_ndcg.txt	0	0	4	71	735	927	103	5	1	0
+ranknet4_lr0.00005000_ndcg.txt	0	0	1	13	734	587	59	10	1	0
+ranknet4_nodes10_ndcg.txt	0	0	2	35	782	864	73	5	0	0

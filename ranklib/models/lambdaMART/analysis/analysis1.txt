@@ -1,0 +1,57 @@
+Reading output_fold_1/baseline_ndcg.txt... 2001 ranked lists [Done]
+Reading output_fold_1/lambdaMART_shr0.10000000_ndcg.txt... 2001 ranked lists [Done]
+Reading output_fold_1/lambdaMART_trees1000_ndcg.txt... 2001 ranked lists [Done]
+Reading output_fold_1/lambdaMART_shr0.00100000_ndcg.txt... 2001 ranked lists [Done]
+Reading output_fold_1/lambdaMART_leaves100_ndcg.txt... 2001 ranked lists [Done]
+Reading output_fold_1/lambdaMART_shr0.01000000_ndcg.txt... 2001 ranked lists [Done]
+Reading output_fold_1/lambdaMART_trees100_ndcg.txt... 2001 ranked lists [Done]
+Reading output_fold_1/lambdaMART_leaves1_ndcg.txt... 2001 ranked lists [Done]
+Reading output_fold_1/lambdaMART_trees1_ndcg.txt... 2001 ranked lists [Done]
+Reading output_fold_1/lambdaMART_shr1.00000000_ndcg.txt... 2001 ranked lists [Done]
+Reading output_fold_1/lambdaMART_leaves5_ndcg.txt... 2001 ranked lists [Done]
+Reading output_fold_1/lambdaMART_trees10000_ndcg.txt... 2001 ranked lists [Done]
+Reading output_fold_1/lambdaMART_trees10_ndcg.txt... 2001 ranked lists [Done]
+Reading output_fold_1/lambdaMART_leaves50_ndcg.txt... 2001 ranked lists [Done]
+Reading output_fold_1/lambdaMART_leaves10_ndcg.txt... 2001 ranked lists [Done]
+Reading output_fold_1/lambdaMART_shr0.00010000_ndcg.txt... 2001 ranked lists [Done]
+
+
+Overall comparison
+------------------------------------------------------------------------
+System	Performance	Improvement	Win	Loss	p-value
+baseline_ndcg.txt [baseline]	0.1739
+lambdaMART_shr0.10000000_ndcg.txt	0.4713	+0.2975 (+171.11%)	1757	147	0.0
+lambdaMART_trees1000_ndcg.txt	0.4713	+0.2975 (+171.11%)	1757	147	0.0
+lambdaMART_shr0.00100000_ndcg.txt	0.3515	+0.1777 (+102.21%)	1584	299	0.0
+lambdaMART_leaves100_ndcg.txt	0.5189	+0.345 (+198.47%)	1799	104	0.0
+lambdaMART_shr0.01000000_ndcg.txt	0.43	+0.2562 (+147.36%)	1706	189	0.0
+lambdaMART_trees100_ndcg.txt	0.4297	+0.2559 (+147.18%)	1696	200	0.0
+lambdaMART_leaves1_ndcg.txt	0.4179	+0.244 (+140.36%)	1687	206	0.0
+lambdaMART_trees1_ndcg.txt	0.3354	+0.1615 (+92.9%)	1577	303	0.0
+lambdaMART_shr1.00000000_ndcg.txt	0.4507	+0.2768 (+159.23%)	1714	187	0.0
+lambdaMART_leaves5_ndcg.txt	0.4484	+0.2746 (+157.93%)	1716	181	0.0
+lambdaMART_trees10000_ndcg.txt	0.4749	+0.3011 (+173.18%)	1760	144	0.0
+lambdaMART_trees10_ndcg.txt	0.3658	+0.1919 (+110.4%)	1611	276	0.0
+lambdaMART_leaves50_ndcg.txt	0.5039	+0.3301 (+189.85%)	1784	125	0.0
+lambdaMART_leaves10_ndcg.txt	0.4713	+0.2975 (+171.11%)	1757	147	0.0
+lambdaMART_shr0.00010000_ndcg.txt	0.3515	+0.1777 (+102.21%)	1584	299	0.0
+
+
+Detailed break down
+------------------------------------------------------------------------
+	[ < -100%)	[-100%, -75%)	[-75%, -50%)	[-50%, -25%)	[-25%, 0%)	(0%, +25%]	(+25%, +50%]	(+50%, +75%]	(+75%, +100%]	( > +100%]
+lambdaMART_shr0.10000000_ndcg.txt	0	0	3	24	120	600	752	357	48	0
+lambdaMART_trees1000_ndcg.txt	0	0	3	24	120	600	752	357	48	0
+lambdaMART_shr0.00100000_ndcg.txt	0	0	5	23	271	914	551	110	9	0
+lambdaMART_leaves100_ndcg.txt	0	0	1	15	88	471	811	445	72	0
+lambdaMART_shr0.01000000_ndcg.txt	0	0	2	21	166	722	691	269	24	0
+lambdaMART_trees100_ndcg.txt	0	0	2	20	178	711	695	265	25	0
+lambdaMART_leaves1_ndcg.txt	0	0	3	25	178	733	702	223	29	0
+lambdaMART_trees1_ndcg.txt	0	0	4	21	278	986	502	85	4	0
+lambdaMART_shr1.00000000_ndcg.txt	0	0	2	19	166	642	723	307	42	0
+lambdaMART_leaves5_ndcg.txt	0	0	4	21	156	631	747	303	35	0
+lambdaMART_trees10000_ndcg.txt	0	0	3	23	118	595	756	358	51	0
+lambdaMART_trees10_ndcg.txt	0	0	3	18	255	878	584	138	11	0
+lambdaMART_leaves50_ndcg.txt	0	0	1	17	107	504	802	406	72	0
+lambdaMART_leaves10_ndcg.txt	0	0	3	24	120	600	752	357	48	0
+lambdaMART_shr0.00010000_ndcg.txt	0	0	5	23	271	914	551	110	9	0
