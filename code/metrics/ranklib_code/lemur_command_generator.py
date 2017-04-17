@@ -50,5 +50,5 @@ def print_commands_ranknet(fold_num):
 	for layers in [1, 2, 3]:
 		print(generate_command_ranknet(fold_num, 1, layers=layers) + "\n")
 
-print_commands_ranknet(foldnum=4)
-print_commands_lambdamart(foldnum=4)
+print_commands_ranknet(fold_num=4)
+print_commands_lambdamart(fold_num=4)
