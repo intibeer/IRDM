@@ -1,11 +1,23 @@
+'''
+Extracts the relevancies from the RankLib score files. Evaluates and writes the 
+NDCG@k and MAP metric to a file.
+'''
+
 import numpy as np
 from metric import *
 import sys
 import glob
-import re
-#print(documents)
 
 def unique_document_ids(documents):
+	'''
+    Retrieves the unique document ids from a RankLib score file.
+
+    Args:
+        documents (list): A list of documents.
+
+    Returns:
+        list: A list of unique ids from the score file.
+    '''
 	dic = {}
 
 	for document in documents:
@@ -13,7 +25,19 @@ def unique_document_ids(documents):
 
 	return sorted(dic.values())
 
-def get_untagged_ordered_relevancies(filename, fold_relevancies, number_of_queries_considered = 100):
+def get_untagged_ordered_relevancies(filename, fold_relevancies, number_of_queries_considered=None):
+	'''
+    Retrieves a list of queries, each query storing the Ranklib score
+    relevancies and their corresponding fold relevencies.
+
+    Args:
+    	filename (str): the file name of the model.
+    	fold_relevancies (dictionary): a dictionary of fold relevancies for each query.
+    	number_of_queries_considered (int): the number of queries considers (to speed up testing) 
+
+    Returns:
+        list: a list of queries
+    '''
 	documents = []
 	queries = []
 
@@ -34,6 +58,15 @@ def get_untagged_ordered_relevancies(filename, fold_relevancies, number_of_queri
 	return queries
 
 def get_tagged_fold_relevancies(fold_path):
+	'''
+	Retrieves the relevancies for each query in a fold.
+
+    Args:
+       fold_path (str): the path to a fold file.
+
+    Returns:
+        dictionary: a dictionary of queries consisting of query id and relevancies.
+    '''
 	with open(fold_path, 'r') as f:
 		qid = -1
 		dic = {}
@@ -54,15 +87,31 @@ def get_tagged_fold_relevancies(fold_path):
 	return dic
 
 class Query: 
+	'''
+	A class to handle queries.
+
+	Parameters:
+		qid (int): query id.
+		relevancies (list): score file relevancies.
+		fold_relevancies (list): fold file relevancies.
+
+	'''
 	def __init__(self, qid, relevancies, fold_relevancies):
 		self.qid = qid
 		self.relevancies = relevancies
 		self.fold_relevancies = fold_relevancies
 
 	def get_previous_relevancies(self):
+		'''
+		Retrieves relevancy of a query for the fold relevancies.
+		'''
 		return self.fold_relevancies[str(self.qid)]
 
 	def order_relevancies(self):
+		'''
+		Orders the document ids, in terms of fold relevancies, in order
+		of score file relevancies.
+		'''
 		relevancies = []
 		document_order = map(lambda x: int(x[0]), self.relevancies)
 
@@ -70,7 +119,6 @@ class Query:
 			relevancies.append(max(map(lambda x: x[0] if x[1] == document_id else -1, self.get_previous_relevancies())))
 		
 		return relevancies
-
 
 if __name__ == '__main__':
 	fold_dir = sys.argv[1]
@@ -88,13 +136,13 @@ if __name__ == '__main__':
 			ndcg_list = []
 
 			for query in get_untagged_ordered_relevancies(model_file, fold_relevancies):
-				ndcg_list.append(ndcg(query.order_relevancies(), 10))
+				ndcg_list.append(ndcg(query.order_relevancies(), 10, 'exp'))
 				map_relevancies.append(query.order_relevancies())
 
 			mean_ndcg = np.mean(ndcg_list)
 			mean_avg_precision = mean_average_precision(map_relevancies, rel_con = 1)
 
-			with open("metric_output/" + model_type + "_metrics_output.txt", 'a') as f:
+			with open("metric_output/" + model_type + "_metrics_output_all(exponential).txt", 'a') as f:
 				f.write(str(fold_num + 1) + ", " + str(model_file.split('/')[-1]) + ", " + str(mean_ndcg) + ", " + str(mean_avg_precision) + "\n")
 
 

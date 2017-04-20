@@ -1,3 +1,7 @@
+'''
+Methods to generate RankLib command line commands.
+'''
+
 def generate_command_lambda_mart(fold_number, method_number, lr=None, trees=None, leaves=None):
 	fold_number = str(fold_number)
 	method_number = str(method_number)
